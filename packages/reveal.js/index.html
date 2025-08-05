@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/simple.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h3>DynamoDB for the Relational Mind</h3>
+          <p>
+            <small
+              >🧠 Bring your SQL brain — but prepare to twist it a bit</small
+            >
+          </p>
+        </section>
+
+        <section><h2>Introduction</h2></section>
+
+        <section>
+          <h2>Order placement microservice</h2>
+          <ul>
+            <li><code>users</code></li>
+            <li><code>orders</code></li>
+            <li><code>products</code></li>
+          </ul>
+
+          <aside class="notes">
+            So, a while ago I was asked to work on a simple order placement
+            microservice. You know — the classic Users, Orders, Products setup.
+            Easy stuff.
+          </aside>
+        </section>
+
+        <section>
+          <div class="mermaid">
+            <pre>
+              erDiagram
+                USERS {
+                  INT id PK
+                  STRING name
+                }
+                ORDERS {
+                  STRING id PK
+                  INT user_id FK
+                  STRING product_id FK
+                }
+                PRODUCTS {
+                  STRING id PK
+                  STRING name
+                  FLOAT price
+                }
+                USERS ||--o{ ORDERS : places
+                PRODUCTS ||--o{ ORDERS : includes
+            </pre>
+          </div>
+
+          <aside class="notes">
+            <ul>
+              <li>
+                And naturally, as someone who came from a SQL background, I
+                said: “Perfect. Let's throw in PostgreSQL. Three tables, a
+                couple indexes, foreign keys, maybe some nice cascading deletes
+                — boom, let's ship it!”
+              </li>
+              <li>
+                But then... product, or was it infra, someone — someone said:
+                “Yeah... we're actually going to use DynamoDB.”
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <section
+          data-background="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2U4bm5iZmtqcnA0cmIzeXY5a2FzcDdycTM3YzM1eDF6eGNqc2t2NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XH9tzHRGQmLSFGP6E8/giphy.gif"
+        >
+          <h2>Excuse me?</h2>
+
+          <aside class="notes">
+            <ul>
+              <li>“Oh. Why?”</li>
+              <li>“Well, because it scales, and it's cheaper.”</li>
+              <li>Cheaper. 😐</li>
+              <li>
+                Well I guess part of cost saved will add up to my bonus right?
+                Right?
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <section>
+          <section>
+            <div class="mermaid">
+              <pre>
+                erDiagram
+                  USERS {
+                    INT id PK
+                    STRING name
+                  }
+                  ORDERS {
+                    STRING id PK
+                    INT user_id FK
+                    STRING product_id FK
+                  }
+                  PRODUCTS {
+                    STRING id PK
+                    STRING name
+                    FLOAT price
+                  }
+                  USERS ||--o{ ORDERS : places
+                  PRODUCTS ||--o{ ORDERS : includes
+              </pre>
+            </div>
+
+            <aside class="notes">
+              <ul>
+                <li>
+                  So I did what any adaptable, team-playing developer would
+                  do...
+                </li>
+                <li>
+                  I Googled “How to create tables in DynamoDB,” copy-pasted some
+                  YAML, and spun up three tables — Users, Orders, and Products.
+                </li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <div class="mermaid">
+              <pre>
+                erDiagram
+                  USERS {
+                    INT id PK
+                    STRING name
+                  }
+                  ORDERS {
+                    STRING id PK
+                    INT user_id
+                    STRING product_id
+                  }
+                  PRODUCTS {
+                    STRING id PK
+                    STRING name
+                    FLOAT price
+                  }
+              </pre>
+            </div>
+
+            <aside class="notes">
+              <ul>
+                <li>Yes. Three. Separate. Tables.</li>
+                <li>Because my SQL brain whispered: Normalize, my child.</li>
+                <li>
+                  I knew I couldn't do joins. But I thought: "Hey, that's fine.
+                  I'll just simulate it in code. How bad can it be?"
+                </li>
+              </ul>
+            </aside>
+          </section>
+        </section>
+
+        <section data-auto-animate>
+          <section>
+            <p>First time I had to get a user and their orders.</p>
+          </section>
+
+          <section>
+            <p>In SQL?</p>
+            <pre class="fragment">
+              <code class="sql" data-trim data-line-numbers="|1|2|3|4">
+                SELECT *
+                FROM users
+                LEFT JOIN orders on users.id = orders.user_id
+                WHERE users.id = '123';
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <p>In DynamoDB?</p>
+            <ol>
+              <li class="fragment">
+                Query the
+                <code>users</code>
+                table
+              </li>
+              <li class="fragment">
+                Query the
+                <code>orders</code>
+                table
+              </li>
+              <li class="fragment">
+                Query the <code>products</code> table for each order
+              </li>
+            </ol>
+
+            <aside class="notes">
+              <ul>
+                <li>“Okay, first query the Users table."</li>
+                <li>"Cool. Now Orders."</li>
+                <li>
+                  "Great. Wait, now for each order I need to go to the Products
+                  table to get the product name?”
+                </li>
+                <li>
+                  Suddenly I'm writing more code than a JOIN clause ever needed.
+                  I felt like I had become my own query planner — just
+                  significantly dumber and way more tired.
+                </li>
+              </ul>
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <p>Oh, and seeding data?</p>
+          </section>
+
+          <section>
+            <p>In SQL?</p>
+            <pre class="fragment">
+              <code class="sql" data-trim data-line-numbers>
+                INSERT INTO users VALUES ('123', 'Bob');
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <p>In DynamoDB?</p>
+            <p class="fragment">🤪</p>
+
+            <aside class="notes">
+              <p>
+                I wrote 60 lines of AWS SDK code, passed a CLI param wrong,
+                accidentally created a table in us-west-1 instead of us-east-1,
+                and considered switching careers.
+              </p>
+            </aside>
+          </section>
+        </section>
+
+        <section
+          data-background="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWNiaHo2YTA3d3FtZTYyMXJhbTlzNHIybTUxNTFwNmNtdnJjdHZ4MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wHmTG0Bus9MOrOvvST/giphy.gif"
+        >
+          <aside class="notes">
+            <ul>
+              <li>
+                At one point I caught myself building a function that made 5
+                separate calls, all to simulate what SQL would give me for free
+                with a join and an index.
+              </li>
+              <li>And I started questioning everything:</li>
+              <li>"Why is everything an item?"</li>
+              <li>"Why does a QueryCommand need that many parameters?"</li>
+              <li>
+                "Why am I denormalizing when normalization was the first thing I
+                learned in CS101?"
+              </li>
+              <li>“Is this what Bezos wanted?”</li>
+            </ul>
+          </aside>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/search/search.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@11.6.0/plugin/mermaid/mermaid.js"></script>
+    <script>
+      Reveal.initialize({
+        center: true,
+        controls: true,
+        hash: true,
+        plugins: [
+          RevealHighlight,
+          RevealMarkdown,
+          RevealMermaid,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom,
+        ],
+        progress: true,
+      });
+    </script>
+  </body>
+</html>
