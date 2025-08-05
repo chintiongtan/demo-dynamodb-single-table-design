@@ -1,0 +1,26 @@
+{
+    "name": "demo-dynamodb-single-table-design",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "dbaeumer.vscode-eslint",
+                "eamodio.gitlens",
+                "esbenp.prettier-vscode"
+            ]
+        }
+    },
+    "dockerComposeFile": [
+        "docker-compose.yaml"
+    ],
+    "forwardPorts": [
+        5432,
+        8000,
+        8001
+    ],
+    "service": "app",
+    "postCreateCommand": "pnpm install",
+    "remoteEnv": {
+        "PODMAN_USERNS": "keep-id"
+    },
+    "workspaceFolder": "/workspace"
+}

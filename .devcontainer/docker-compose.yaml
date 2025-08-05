@@ -1,0 +1,43 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: sleep infinity
+    container_name: demo-dynamodb-single-table-design
+    image: demo-dynamodb-single-table-design
+    volumes:
+      - ../:/workspace:cached
+
+  postgres:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+
+  localstack:
+    image: localstack/localstack:3
+    environment:
+      - SERVICES=dynamodb
+      - DEBUG=1
+    ports:
+      - 4566:4566
+    volumes:
+      - localstack-data:/var/lib/localstack
+
+  dynamodb-admin:
+    image: aaronshaf/dynamodb-admin
+    ports:
+      - 8001:8001
+    environment:
+      DYNAMO_ENDPOINT: http://localstack:4566
+      AWS_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+    depends_on:
+      - localstack
+
+volumes:
+  localstack-data:
