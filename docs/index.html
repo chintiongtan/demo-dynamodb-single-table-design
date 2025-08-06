@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/reveal.css" />
-    <link rel="stylesheet" href="dist/theme/simple.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" />
 
     <!-- Theme used for syntax highlighted code -->
     <link rel="stylesheet" href="plugin/highlight/monokai.css" />
@@ -47,22 +47,22 @@
           <div class="mermaid">
             <pre>
               erDiagram
-                USERS {
+                users {
                   INT id PK
                   STRING name
                 }
-                ORDERS {
+                orders {
                   STRING id PK
                   INT user_id FK
                   STRING product_id FK
                 }
-                PRODUCTS {
+                products {
                   STRING id PK
                   STRING name
                   FLOAT price
                 }
-                USERS ||--o{ ORDERS : places
-                PRODUCTS ||--o{ ORDERS : includes
+                users ||--o{ orders : places
+                products ||--o{ orders : includes
             </pre>
           </div>
 
@@ -84,8 +84,13 @@
 
         <section
           data-background="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2U4bm5iZmtqcnA0cmIzeXY5a2FzcDdycTM3YzM1eDF6eGNqc2t2NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XH9tzHRGQmLSFGP6E8/giphy.gif"
+          data-transition="zoom-in fade-out"
         >
-          <h2>Excuse me?</h2>
+          <div
+            style="background-color: rgba(255, 255, 255, 0.5); padding: 16px"
+          >
+            <h2>Excuse me?</h2>
+          </div>
 
           <aside class="notes">
             <ul>
@@ -101,26 +106,26 @@
         </section>
 
         <section>
-          <section>
+          <section data-transition="zoom">
             <div class="mermaid">
               <pre>
                 erDiagram
-                  USERS {
+                  users {
                     INT id PK
                     STRING name
                   }
-                  ORDERS {
+                  orders {
                     STRING id PK
                     INT user_id FK
                     STRING product_id FK
                   }
-                  PRODUCTS {
+                  products {
                     STRING id PK
                     STRING name
                     FLOAT price
                   }
-                  USERS ||--o{ ORDERS : places
-                  PRODUCTS ||--o{ ORDERS : includes
+                  users ||--o{ orders : places
+                  products ||--o{ orders : includes
               </pre>
             </div>
 
@@ -138,20 +143,20 @@
             </aside>
           </section>
 
-          <section>
+          <section data-transition="zoom">
             <div class="mermaid">
               <pre>
                 erDiagram
-                  USERS {
+                  users {
                     INT id PK
                     STRING name
                   }
-                  ORDERS {
+                  orders {
                     STRING id PK
                     INT user_id
                     STRING product_id
                   }
-                  PRODUCTS {
+                  products {
                     STRING id PK
                     STRING name
                     FLOAT price
@@ -174,11 +179,11 @@
 
         <section data-auto-animate>
           <section>
-            <p>First time I had to get a user and their orders.</p>
+            <h2>Getting a user and their orders</h2>
           </section>
 
           <section>
-            <p>In SQL?</p>
+            <h2>In SQL?</h2>
             <pre class="fragment">
               <code class="sql" data-trim data-line-numbers="|1|2|3|4">
                 SELECT *
@@ -190,7 +195,7 @@
           </section>
 
           <section>
-            <p>In DynamoDB?</p>
+            <h2>In DynamoDB?</h2>
             <ol>
               <li class="fragment">
                 Query the
@@ -227,11 +232,11 @@
 
         <section>
           <section>
-            <p>Oh, and seeding data?</p>
+            <h2>Oh, and seeding data?</h2>
           </section>
 
           <section>
-            <p>In SQL?</p>
+            <h2>In SQL?</h2>
             <pre class="fragment">
               <code class="sql" data-trim data-line-numbers>
                 INSERT INTO users VALUES ('123', 'Bob');
@@ -240,8 +245,15 @@
           </section>
 
           <section>
-            <p>In DynamoDB?</p>
-            <p class="fragment">🤪</p>
+            <h2>In DynamoDB?&nbsp;<span class="fragment">🤪</span></h2>
+            <ul>
+              <li class="fragment">60 lines of AWS SDK code</li>
+              <li class="fragment">Passed a CLI param wrong</li>
+              <li class="fragment">
+                <code>us-west-1</code> instead of <code>us-east-1</code>
+              </li>
+              <li class="fragment">Considered switching career</li>
+            </ul>
 
             <aside class="notes">
               <p>
@@ -254,8 +266,25 @@
         </section>
 
         <section
-          data-background="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWNiaHo2YTA3d3FtZTYyMXJhbTlzNHIybTUxNTFwNmNtdnJjdHZ4MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wHmTG0Bus9MOrOvvST/giphy.gif"
+          data-background="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExajV4MnhyczY2dnczZ2FwcXlvdnhrMmdwYmg3ZTFyend1d3V0cjhhbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/rhUeALlJgHrlEDYSoq/giphy.gif"
         >
+          <div
+            class="fragment"
+            style="background-color: rgba(255, 255, 255, 0.5); padding: 16px"
+          >
+            <ul>
+              <li>"Why is everything an item?"</li>
+              <li class="fragment">
+                "Why does a QueryCommand need that many parameters?"
+              </li>
+              <li class="fragment">
+                "Why am I denormalizing when normalization was the first thing I
+                learned in CS101?"
+              </li>
+              <li class="fragment">“Is this what Bezos wanted?”</li>
+            </ul>
+          </div>
+
           <aside class="notes">
             <ul>
               <li>
@@ -264,15 +293,428 @@
                 with a join and an index.
               </li>
               <li>And I started questioning everything:</li>
-              <li>"Why is everything an item?"</li>
-              <li>"Why does a QueryCommand need that many parameters?"</li>
-              <li>
-                "Why am I denormalizing when normalization was the first thing I
-                learned in CS101?"
-              </li>
-              <li>“Is this what Bezos wanted?”</li>
             </ul>
           </aside>
+        </section>
+
+        <section>
+          <h2 class="fragment">Single Table Design</h2>
+
+          <p class="fragment">
+            It sounded insane at first...&nbsp;<span class="fragment"
+              >until it didnt.</span
+            >
+          </p>
+
+          <aside class="notes">
+            <ul>
+              <li>
+                When I was about to consider becoming a product manager, I
+                discovered this thing called Single Table Design
+              </li>
+              <li>And that's what today's talk is about</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section>
+          <h2>What is DynamoDB?</h2>
+
+          <ul>
+            <li class="fragment">Managed NoSQL database by AWS</li>
+            <li class="fragment">
+              Designed for ultra-fast, high-scale and low-latency workloads
+            </li>
+            <li class="fragment">
+              You get:
+              <ul>
+                <li class="fragment">Pay-per-request pricing ✅</li>
+                <li class="fragment">No infrastructure headaches ✅</li>
+                <li class="fragment">
+                  No joins, no schemas, no comfort zone ❌
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <aside class="notes">
+            Before we dive deeper, let's briefly talk about DynamoDB
+          </aside>
+        </section>
+
+        <section>
+          <h2>What is Schema-less?</h2>
+
+          <ul>
+            <li class="fragment">
+              “Okay cool, where do I define my table columns?”
+            </li>
+            <li class="fragment">DynamoDB: “Columns? Lol.” 😎</li>
+            <ul>
+              <li class="fragment">Lets you YOLO your data structure</li>
+            </ul>
+          </ul>
+        </section>
+
+        <section>
+          <pre>
+            <code class="json" data-trim data-line-numbers>
+              { "PK": "USER#123", "Name": "Bob", "Email": "bob@example.com" }
+              { "PK": "ORDER#456", "UserId": "123", "ProductId": "789", "Timestamp": "2025-08-02T14:30:00Z" }
+              { "PK": "PRODUCT#789", "Name": "Keyboard", "Price": 120 }
+            </code>
+          </pre>
+
+          <ul>
+            <li class="fragment">Has no column definitions</li>
+            <li class="fragment">Each item can have different attributes</li>
+            <li class="fragment">
+              The only required fields are your partition key (<code>PK</code>)
+              and maybe sort key (<code>SK</code>)
+            </li>
+          </ul>
+
+          <aside class="notes">
+            This is what we mean by schema-less — the DB doesn't care what shape
+            your data takes. It's your app's job to make sense of it.
+          </aside>
+        </section>
+
+        <section>
+          <h2>What is Single Table Design?</h2>
+
+          <ul>
+            <li class="fragment">
+              One table to rule them all, one table to find them... 🧙‍♂️
+            </li>
+            <li class="fragment">
+              You store multiple entity types using a composite key
+            </li>
+            <li class="fragment">
+              It's not chaos if it's intentional — and it's fast
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <section data-transition="zoom">
+            <pre>
+              <code class="json" data-trim data-line-numbers>
+                { "PK": "USER#123", "SK": "METADATA", "EntityType": "USER", "UserId": "123", "Name": "Bob", "Email": "bob@example.com" }
+                { "PK": "USER#123", "SK": "ORDER#456", "EntityType": "ORDER", "ProductId": "001", "Timestamp": "2025-08-02T14:30:00Z" }
+                { "PK": "USER#123", "SK": "ORDER#789", "EntityType": "ORDER", "ProductId": "002", "Timestamp": "2025-09-02T14:30:00Z" }
+                { "PK": "PRODUCT#001", "EntityType": "PRODUCT", "Name": "Mechanical Keyboard", "Price": 120 }
+                { "PK": "PRODUCT#002", "EntityType": "PRODUCT", "Name": "Ergonomic Chair", "Price": 350 }
+              </code>
+            </pre>
+          </section>
+
+          <section data-transition="zoom">
+            <div class="mermaid">
+              <pre>
+                graph TD
+                  subgraph DynamoDB Single Table
+                    U["`PK: USER#123
+                      SK: METADATA
+                      EntityType: USER
+                      Name: Bob`"]
+                    O1["`PK: USER#123
+                      SK: ORDER#456
+                      EntityType: ORDER
+                      ProductId: 001`"]
+                    O2["`PK: USER#123
+                      SK: ORDER#789
+                      EntityType: ORDER
+                      ProductId: 002`"]
+                    P1["`PK: PRODUCT#001
+                      SK: METADATA
+                      EntityType: PRODUCT
+                      Name: 'Mechanical Keyboard'`"]
+                    P2["`PK: PRODUCT#002
+                      SK: METADATA
+                      EntityType: PRODUCT
+                      Name: 'Ergonomic Chair'`"]
+                  end
+                  U --> O1
+                  U --> O2
+                  O1 -. references .-> P1
+                  O2 -. references .-> P2
+              </pre>
+            </div>
+
+            <p class="fragment">
+              <em>One query. One partition. Zero JOINs. Infinite happiness.</em>
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <h2>4 main use cases</h2>
+
+          <ol>
+            <li class="fragment">Getting user profile and orders</li>
+            <li class="fragment">Getting user orders</li>
+            <li class="fragment">Getting user profile</li>
+            <li class="fragment">Getting all orders</li>
+          </ol>
+        </section>
+
+        <section>
+          <section>
+            <h2>1. Getting user profile and orders</h2>
+          </section>
+
+          <section>
+            <h2>In SQL?</h2>
+            <pre class="fragment">
+              <code class="sql" data-trim data-line-numbers>
+                SELECT *
+                FROM users
+                LEFT JOIN orders on users.id = orders.user_id
+                WHERE users.id = '123';
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <h2>In DynamoDB?</h2>
+            <pre class="fragment">
+              <code class="javascript" data-trim data-line-numbers="|3,5">
+                new QueryCommand({
+                  TableName: 'TheOneAndOnlyTable',
+                  KeyConditionExpression: 'PK = :pk',
+                  ExpressionAttributeValues: {
+                    ':pk': 'USER#123'
+                  }
+                })
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <h2>What you get in return?</h2>
+            <pre class="fragment">
+              <code class="json" data-trim data-line-numbers="|3-4|11-12|21-22">
+                [
+                  {
+                    "PK": "USER#123",
+                    "SK": "METADATA",
+                    "EntityType": "USER",
+                    "UserId": "123",
+                    "Name": "Bob",
+                    "Email": "bob@example.com"
+                  },
+                  {
+                    "PK": "USER#123",
+                    "SK": "ORDER#456",
+                    "EntityType": "ORDER",
+                    "OrderId": "456",
+                    "ProductId": "001",
+                    "ProductName": "Mechanical Keyboard",
+                    "ProductPrice": 120,
+                    "Timestamp": "2025-08-01T10:00:00Z"
+                  },
+                  {
+                    "PK": "USER#123",
+                    "SK": "ORDER#789",
+                    "EntityType": "ORDER",
+                    "OrderId": "789",
+                    "ProductId": "002",
+                    "ProductName": "Ergonomic Chair",
+                    "ProductPrice": 350,
+                    "Timestamp": "2025-08-02T14:30:00Z"
+                  }
+                ]
+              </code>
+            </pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>2. Getting user orders</h2>
+          </section>
+
+          <section>
+            <h2>In SQL?</h2>
+            <pre class="fragment">
+              <code class="sql" data-trim data-line-numbers>
+                SELECT *
+                FROM orders
+                WHERE user_id = 123;
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <h2>In DynamoDB?</h2>
+            <pre class="fragment">
+              <code class="javascript" data-trim data-line-numbers="|3,5-6">
+                new QueryCommand({
+                  TableName: 'TheOneAndOnlyTable',
+                  KeyConditionExpression: 'PK = :pk AND begins_with(SK, :prefix)',
+                  ExpressionAttributeValues: {
+                    ':pk': 'USER#123',
+                    ':prefix': 'ORDER#'
+                  }
+                })
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <h2>What you get in return?</h2>
+            <pre class="fragment">
+              <code class="json" data-trim data-line-numbers="|3-4|12-13">
+                [
+                  {
+                    "PK": "USER#123",
+                    "SK": "ORDER#456",
+                    "OrderId": "456",
+                    "ProductId": "001",
+                    "ProductName": "Mechanical Keyboard",
+                    "ProductPrice": 120,
+                    "Timestamp": "2025-08-01T10:00:00Z"
+                  },
+                  {
+                    "PK": "USER#123",
+                    "SK": "ORDER#789",
+                    "OrderId": "789",
+                    "ProductId": "002",
+                    "ProductName": "Ergonomic Chair",
+                    "ProductPrice": 350,
+                    "Timestamp": "2025-08-02T14:30:00Z"
+                  }
+                ]
+              </code>
+            </pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>3. Getting user profile</h2>
+          </section>
+
+          <section>
+            <h2>In SQL?</h2>
+            <pre class="fragment">
+              <code class="sql" data-trim data-line-numbers>
+                SELECT *
+                FROM users
+                WHERE id = 123;
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <h2>In DynamoDB?</h2>
+            <pre class="fragment">
+              <code class="javascript" data-trim data-line-numbers="|3,5-6">
+                new QueryCommand({
+                  TableName: 'TheOneAndOnlyTable',
+                  KeyConditionExpression: 'PK = :pk AND SK = :sk',
+                  ExpressionAttributeValues: {
+                    ':pk': 'USER#123',
+                    ':sk': 'METADATA'
+                  }
+                })
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <h2>What you get in return?</h2>
+            <pre class="fragment">
+              <code class="json" data-trim data-line-numbers="|3-4">
+                [
+                  {
+                    "PK": "USER#123",
+                    "SK": "METADATA",
+                    "EntityType": "USER",
+                    "UserId": "123",
+                    "Name": "Bob",
+                    "Email": "bob@example.com"
+                  },
+                ]
+              </code>
+            </pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>4. Getting all orders</h2>
+          </section>
+
+          <section>
+            <h2>In SQL?</h2>
+            <pre class="fragment">
+              <code class="sql" data-trim data-line-numbers>
+                SELECT *
+                FROM orders;
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <h2>In DynamoDB?</h2>
+            <ul>
+              <li class="fragment">Can only query by partition key</li>
+              <li class="fragment">Global Secondary Index (GSI)</li>
+              <ul>
+                <li class="fragment">
+                  Like alternate universes: same data, different access patterns
+                </li>
+                <li class="fragment">
+                  Useful when you don't have the partition key handy
+                </li>
+              </ul>
+            </ul>
+          </section>
+
+          <section>
+            <pre class="fragment">
+              <code class="javascript" data-trim data-line-numbers="|3-4,6">
+                new QueryCommand({
+                  TableName: 'TheOneAndOnlyTable',
+                  IndexName: 'EntityTypeIndex',
+                  KeyConditionExpression: 'EntityType = :entityType',
+                  ExpressionAttributeValues: {
+                    ':entityType': 'ORDER'
+                  }
+                })
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <h2>What you get in return?</h2>
+            <pre class="fragment">
+              <code class="json" data-trim data-line-numbers="|3-4|12-13">
+                [
+                  {
+                    "PK": "USER#123",
+                    "SK": "ORDER#456",
+                    "OrderId": "456",
+                    "ProductId": "001",
+                    "ProductName": "Mechanical Keyboard",
+                    "ProductPrice": 120,
+                    "Timestamp": "2025-08-01T10:00:00Z"
+                  },
+                  {
+                    "PK": "USER#123",
+                    "SK": "ORDER#789",
+                    "OrderId": "789",
+                    "ProductId": "002",
+                    "ProductName": "Ergonomic Chair",
+                    "ProductPrice": 350,
+                    "Timestamp": "2025-08-02T14:30:00Z"
+                  }
+                ]
+              </code>
+            </pre>
+          </section>
         </section>
       </div>
     </div>
