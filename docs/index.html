@@ -17,7 +17,7 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section>
+        <section id="cover">
           <h3>DynamoDB for the Relational Mind</h3>
           <p>
             <small
@@ -26,9 +26,9 @@
           </p>
         </section>
 
-        <section><h2>Introduction</h2></section>
+        <section id="about-me"><h2>About Me</h2></section>
 
-        <section>
+        <section id="story-1">
           <h2>Order placement microservice</h2>
           <ul>
             <li><code>users</code></li>
@@ -43,7 +43,7 @@
           </aside>
         </section>
 
-        <section>
+        <section id="story-2">
           <div class="mermaid">
             <pre>
               erDiagram
@@ -83,6 +83,7 @@
         </section>
 
         <section
+          id="story-3"
           data-background="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2U4bm5iZmtqcnA0cmIzeXY5a2FzcDdycTM3YzM1eDF6eGNqc2t2NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XH9tzHRGQmLSFGP6E8/giphy.gif"
           data-transition="zoom-in fade-out"
         >
@@ -105,7 +106,7 @@
           </aside>
         </section>
 
-        <section>
+        <section id="story-4">
           <section data-transition="zoom">
             <div class="mermaid">
               <pre>
@@ -177,7 +178,7 @@
           </section>
         </section>
 
-        <section data-auto-animate>
+        <section id="rant-1">
           <section>
             <h2>Getting a user and their orders</h2>
           </section>
@@ -230,7 +231,7 @@
           </section>
         </section>
 
-        <section>
+        <section id="rant-2">
           <section>
             <h2>Oh, and seeding data?</h2>
           </section>
@@ -266,6 +267,7 @@
         </section>
 
         <section
+          id="rant-3"
           data-background="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExajV4MnhyczY2dnczZ2FwcXlvdnhrMmdwYmg3ZTFyend1d3V0cjhhbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/rhUeALlJgHrlEDYSoq/giphy.gif"
         >
           <div
@@ -297,7 +299,7 @@
           </aside>
         </section>
 
-        <section>
+        <section id="single-table-design">
           <h2 class="fragment">Single Table Design</h2>
 
           <p class="fragment">
@@ -317,7 +319,7 @@
           </aside>
         </section>
 
-        <section>
+        <section id="what-is-dynamodb">
           <h2>What is DynamoDB?</h2>
 
           <ul>
@@ -342,7 +344,7 @@
           </aside>
         </section>
 
-        <section>
+        <section id="what-is-schemaless-1">
           <h2>What is Schema-less?</h2>
 
           <ul>
@@ -356,7 +358,7 @@
           </ul>
         </section>
 
-        <section>
+        <section id="what-is-schemaless-2">
           <pre>
             <code class="json" data-trim data-line-numbers>
               { "PK": "USER#123", "Name": "Bob", "Email": "bob@example.com" }
@@ -380,7 +382,7 @@
           </aside>
         </section>
 
-        <section>
+        <section id="what-is-single-table-design">
           <h2>What is Single Table Design?</h2>
 
           <ul>
@@ -396,7 +398,7 @@
           </ul>
         </section>
 
-        <section>
+        <section id="dynamodb-data-structure">
           <section data-transition="zoom">
             <pre>
               <code class="json" data-trim data-line-numbers>
@@ -441,14 +443,16 @@
                   O2 -. references .-> P2
               </pre>
             </div>
+          </section>
 
-            <p class="fragment">
+          <section>
+            <p>
               <em>One query. One partition. Zero JOINs. Infinite happiness.</em>
             </p>
           </section>
         </section>
 
-        <section>
+        <section id="main-use-cases">
           <h2>4 main use cases</h2>
 
           <ol>
@@ -459,7 +463,7 @@
           </ol>
         </section>
 
-        <section>
+        <section id="1-getting-user-profile-and-orders">
           <section>
             <h2>1. Getting user profile and orders</h2>
           </section>
@@ -530,7 +534,7 @@
           </section>
         </section>
 
-        <section>
+        <section id="2-getting-user-orders">
           <section>
             <h2>2. Getting user orders</h2>
           </section>
@@ -570,6 +574,7 @@
                   {
                     "PK": "USER#123",
                     "SK": "ORDER#456",
+                    "EntityType": "ORDER",
                     "OrderId": "456",
                     "ProductId": "001",
                     "ProductName": "Mechanical Keyboard",
@@ -579,6 +584,7 @@
                   {
                     "PK": "USER#123",
                     "SK": "ORDER#789",
+                    "EntityType": "ORDER",
                     "OrderId": "789",
                     "ProductId": "002",
                     "ProductName": "Ergonomic Chair",
@@ -591,7 +597,7 @@
           </section>
         </section>
 
-        <section>
+        <section id="3-getting-user-profile">
           <section>
             <h2>3. Getting user profile</h2>
           </section>
@@ -642,7 +648,7 @@
           </section>
         </section>
 
-        <section>
+        <section id="4-getting-all-orders">
           <section>
             <h2>4. Getting all orders</h2>
           </section>
@@ -674,7 +680,22 @@
           </section>
 
           <section>
-            <pre class="fragment">
+            <h2>Create a GSI</h2>
+            <pre>
+              <code class="json" data-trim data-line-numbers="|2,4">
+                {
+                  "IndexName": "EntityTypeIndex",
+                  "KeySchema": [
+                    { "AttributeName": "entityType", "KeyType": "HASH" }
+                  ]
+                }
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <h2>Query using GSI</h2>
+            <pre>
               <code class="javascript" data-trim data-line-numbers="|3-4,6">
                 new QueryCommand({
                   TableName: 'TheOneAndOnlyTable',
@@ -691,11 +712,12 @@
           <section>
             <h2>What you get in return?</h2>
             <pre class="fragment">
-              <code class="json" data-trim data-line-numbers="|3-4|12-13">
+              <code class="json" data-trim data-line-numbers="|3-5|13-15">
                 [
                   {
                     "PK": "USER#123",
                     "SK": "ORDER#456",
+                    "EntityType": "ORDER",
                     "OrderId": "456",
                     "ProductId": "001",
                     "ProductName": "Mechanical Keyboard",
@@ -705,6 +727,7 @@
                   {
                     "PK": "USER#123",
                     "SK": "ORDER#789",
+                    "EntityType": "ORDER",
                     "OrderId": "789",
                     "ProductId": "002",
                     "ProductName": "Ergonomic Chair",
@@ -714,6 +737,234 @@
                 ]
               </code>
             </pre>
+          </section>
+        </section>
+
+        <section id="what-single-table-design-is-for">
+          <section>
+            <h2>Single Table Design is great when ...</h2>
+          </section>
+
+          <section>
+            <h2>1. ✅ Your access patterns are known and stable</h2>
+            <ul>
+              <li class="fragment">
+                <em
+                  >You're not just throwing queries at the database hoping
+                  something sticks.</em
+                >
+              </li>
+              <li class="fragment">
+                You know <em>how</em> you'll access the data before designing
+                the schema.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>2. ✅ You want fast reads. Like, now.</h2>
+            <ul>
+              <li class="fragment">
+                <em>You want millisecond latency, not millisecond regrets.</em>
+              </li>
+              <li class="fragment">
+                1 partition = all related data. No JOINs. No query planning.
+                <em>High</em> read throughput with <em>low</em> latency (&lt;
+                10ms).
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>3. ✅ You're building for scale, not style.</h2>
+            <ul>
+              <li class="fragment">
+                <em
+                  >Your system might one day replace Google Search. Plan
+                  ahead.</em
+                >
+              </li>
+              <li class="fragment">
+                Scales <em>horizontally</em> without tuning or indexing
+                overhead.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>4. ✅ You want to spend less.</h2>
+            <ul>
+              <li class="fragment">
+                <em
+                  >Your idle database won't run up the AWS bill just to look
+                  busy.</em
+                >
+              </li>
+              <li class="fragment">
+                Pay-per-request = <em>cost-efficient</em> at scale.
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <section id="what-single-table-design-isnt-for">
+          <section>
+            <h2>When Single Table Design is <em>not</em> your best friend</h2>
+          </section>
+
+          <section>
+            <h2>1. ❌ You don't know what you want - yet</h2>
+            <ul>
+              <li class="fragment">
+                <em
+                  >Your access patterns change more often than the fashion
+                  trend.</em
+                >
+              </li>
+              <li class="fragment">
+                DynamoDB isn't suitable for flexible, exploratory queries or
+                reporting dashboards.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>2. ❌ Your relationships are many-to-many or recursive</h2>
+            <ul>
+              <li class="fragment">
+                <em>Your queries look like detective novels</em>
+              </li>
+              <li class="fragment">
+                Single table design struggles with complex relationship
+                traversal
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>3. ❌ You're building complex joins like it's a sport</h2>
+            <ul>
+              <li class="fragment">
+                <em
+                  >If your queries have JOINs nested deeper than your trauma,
+                  stick with Postgres.</em
+                >
+              </li>
+              <li class="fragment">
+                DynamoDB lacks native joins; cross-entity relationships must be
+                modeled manually or denormalized
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>4. ❌ You love schema enforcement</h2>
+            <ul>
+              <li class="fragment">
+                <em
+                  >You want a schema that slaps your hand when you're wrong.</em
+                >
+              </li>
+              <li class="fragment">
+                DynamoDB won't stop you from writing garbage. Instead, structure
+                has to be enforced through app logic, and people make mistake.
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <section id="strategies-to-adopt-single-table-design">
+          <section>
+            <h2>Adopting Single Table Design (Without Crying)</h2>
+          </section>
+
+          <section>
+            <h2>1. 🧠 Start with your access patterns</h2>
+            <ul>
+              <li class="fragment">
+                <em>Don't design for tables. Design for questions.</em>
+              </li>
+              <li class="fragment">
+                Begin with real user queries and design your keys and items
+                around how you'll read them.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>2. 🧠 Design predictable composite keys</h2>
+            <ul>
+              <li class="fragment">
+                <em
+                  >Name your keys like they'll be debugged by your future,
+                  sleep-deprived self.</em
+                >
+              </li>
+              <li class="fragment">
+                Use clear, consistent patterns like <code
+                  >PK: USER#123, SK: ORDER#456</code
+                >
+                for maintainability.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>3. 🧠 Co-locate related data</h2>
+            <ul>
+              <li class="fragment">
+                <em
+                  >Group your data like you refuse to pay for that expensive
+                  shipping.</em
+                >
+              </li>
+              <li class="fragment">
+                Place all logically related items under the same PK to enable
+                efficient single-query reads.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>4. 🧠 Embrace denormalization</h2>
+            <ul>
+              <li class="fragment">
+                <em
+                  >Store the product name inside the order. Future-you will
+                  thank you when rendering UI.</em
+                >
+              </li>
+              <li class="fragment">
+                Duplicating frequently accessed data improves performance and
+                reduces query complexity.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>5. 🧠 Use GSI sparingly</h2>
+            <ul>
+              <li class="fragment">
+                <em>GSIs are like espresso shots: use only when necessary.</em>
+              </li>
+              <li class="fragment">
+                Each GSI adds cost and complexity — only create indexes that
+                support critical access patterns.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>6. 🧠 Validate structure in code</h2>
+            <ul>
+              <li class="fragment">
+                <em>Just because DynamoDB lets you YOLO, you shouldn't.</em>
+              </li>
+              <li class="fragment">
+                Use schema validators like TypeScript types or Zod to enforce
+                consistency.
+              </li>
+            </ul>
           </section>
         </section>
       </div>
