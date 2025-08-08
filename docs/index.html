@@ -9,10 +9,17 @@
 
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/reveal.css" />
-    <link rel="stylesheet" href="dist/theme/white.css" />
+    <link rel="stylesheet" href="dist/theme/moon.css" />
 
     <!-- Theme used for syntax highlighted code -->
     <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+    <style>
+      .emphasize {
+        font-style: italic;
+        text-decoration: underline;
+      }
+    </style>
   </head>
   <body>
     <div class="reveal">
@@ -26,26 +33,96 @@
           </p>
         </section>
 
-        <section id="about-me"><h2>About Me</h2></section>
-
-        <section id="story-1">
-          <h2>Order placement microservice</h2>
+        <section id="about-me">
+          <h2>About Me</h2>
           <ul>
-            <li><code>users</code></li>
-            <li><code>orders</code></li>
-            <li><code>products</code></li>
+            <li class="fragment">Chin Tiong / Alvin</li>
+            <li class="fragment">🦁 Senior web engineer at MoneyLion</li>
+            <li class="fragment">
+              💻 Full stack developer for about 10 years now
+            </li>
+            <li class="fragment">
+              💼 Have worked in both start-ups and established companies
+            </li>
+            <li class="fragment">🏎️ F1</li>
+            <li class="fragment">👨🏻 Officially a dad now</li>
           </ul>
 
           <aside class="notes">
-            So, a while ago I was asked to work on a simple order placement
-            microservice. You know — the classic Users, Orders, Products setup.
-            Easy stuff.
+            <ul>
+              <li>
+                The name is Chin Tiong but you can also call me Alvin, which is
+                great because it's shorter and doesn't require perfect Chinese
+                pronunciation. Hokkien to be specific.
+              </li>
+              <li>
+                Long enough to see trends going full circle
+                <ul>
+                  <li>
+                    From native mobile to hybrid, and back to native because
+                    "performance matters again"
+                  </li>
+                  <li>
+                    From SQL to NoSQL, and occasionally back again with regrets
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Start-ups where "full stack" sometimes meant fixing the router
+              </li>
+              <li>
+                Established companies, where I learned the value of process -
+                and the fine art of scheduling a meeting to discuss the meeting
+                we just had
+              </li>
+              <li>
+                When I'm not coding, I'm watching F1 — where milliseconds matter
+                and no one complains about too many logs
+              </li>
+              <li>
+                Became a dad to a 4-month old baby girl - so if I suddenly pause
+                mid-talk, it's probably because my brain thinks it's 3AM and a
+                diaper needs changing
+              </li>
+            </ul>
           </aside>
+        </section>
+
+        <section id="story-1">
+          <section>
+            <h2>Order placement microservice</h2>
+            <ul>
+              <li><code>users</code></li>
+              <li><code>orders</code></li>
+              <li><code>products</code></li>
+            </ul>
+
+            <aside class="notes">
+              So, a while ago I was asked to work on a simple order placement
+              microservice. You know — the classic Users, Orders, Products
+              setup. Easy stuff.
+            </aside>
+          </section>
+
+          <section id="main-use-cases-1">
+            <h2>4 main use cases</h2>
+
+            <ol>
+              <li class="fragment">Getting user profile and orders</li>
+              <li class="fragment">Getting user orders</li>
+              <li class="fragment">Getting user profile</li>
+              <li class="fragment">Getting all orders</li>
+            </ol>
+          </section>
         </section>
 
         <section id="story-2">
           <div class="mermaid">
             <pre>
+---
+config:
+  theme: 'dark'
+---
               erDiagram
                 users {
                   INT id PK
@@ -90,7 +167,7 @@
           <div
             style="background-color: rgba(255, 255, 255, 0.5); padding: 16px"
           >
-            <h2>Excuse me?</h2>
+            <h2 style="color: #000">Excuse me?</h2>
           </div>
 
           <aside class="notes">
@@ -110,6 +187,10 @@
           <section data-transition="zoom">
             <div class="mermaid">
               <pre>
+---
+config:
+  theme: 'dark'
+---
                 erDiagram
                   users {
                     INT id PK
@@ -147,6 +228,10 @@
           <section data-transition="zoom">
             <div class="mermaid">
               <pre>
+---
+config:
+  theme: 'dark'
+---
                 erDiagram
                   users {
                     INT id PK
@@ -180,7 +265,7 @@
 
         <section id="rant-1">
           <section>
-            <h2>Getting a user and their orders</h2>
+            <h2>1. Getting user profile and orders</h2>
           </section>
 
           <section>
@@ -272,7 +357,11 @@
         >
           <div
             class="fragment"
-            style="background-color: rgba(255, 255, 255, 0.5); padding: 16px"
+            style="
+              background-color: rgba(255, 255, 255, 0.5);
+              color: #000;
+              padding: 16px;
+            "
           >
             <ul>
               <li>"Why is everything an item?"</li>
@@ -325,16 +414,18 @@
           <ul>
             <li class="fragment">Managed NoSQL database by AWS</li>
             <li class="fragment">
-              Designed for ultra-fast, high-scale and low-latency workloads
+              Designed for <span class="emphasize">ultra-fast</span>,
+              <span class="emphasize">high-scale</span> and
+              <span class="emphasize">low-latency</span> workloads
             </li>
             <li class="fragment">
               You get:
               <ul>
-                <li class="fragment">Pay-per-request pricing ✅</li>
-                <li class="fragment">No infrastructure headaches ✅</li>
-                <li class="fragment">
-                  No joins, no schemas, no comfort zone ❌
-                </li>
+                <li class="fragment">✅ Pay-per-request pricing</li>
+                <li class="fragment">✅ No infrastructure headaches</li>
+                <li class="fragment">❌ No joins</li>
+                <li class="fragment">❌ No schemas</li>
+                <li class="fragment">❌ No comfort zone</li>
               </ul>
             </li>
           </ul>
@@ -344,22 +435,23 @@
           </aside>
         </section>
 
-        <section id="what-is-schemaless-1">
-          <h2>What is Schema-less?</h2>
+        <section id="what-is-schemaless">
+          <section>
+            <h2>What is Schema-less?</h2>
 
-          <ul>
-            <li class="fragment">
-              “Okay cool, where do I define my table columns?”
-            </li>
-            <li class="fragment">DynamoDB: “Columns? Lol.” 😎</li>
             <ul>
-              <li class="fragment">Lets you YOLO your data structure</li>
+              <li class="fragment">
+                “Okay cool, where do I define my table columns?”
+              </li>
+              <li class="fragment">DynamoDB: “Columns? Lol.” 😎</li>
+              <ul>
+                <li class="fragment">YOLO your data structure</li>
+              </ul>
             </ul>
-          </ul>
-        </section>
+          </section>
 
-        <section id="what-is-schemaless-2">
-          <pre>
+          <section>
+            <pre>
             <code class="json" data-trim data-line-numbers>
               { "PK": "USER#123", "Name": "Bob", "Email": "bob@example.com" }
               { "PK": "ORDER#456", "UserId": "123", "ProductId": "789", "Timestamp": "2025-08-02T14:30:00Z" }
@@ -367,19 +459,27 @@
             </code>
           </pre>
 
-          <ul>
-            <li class="fragment">Has no column definitions</li>
-            <li class="fragment">Each item can have different attributes</li>
-            <li class="fragment">
-              The only required fields are your partition key (<code>PK</code>)
-              and maybe sort key (<code>SK</code>)
-            </li>
-          </ul>
+            <ul>
+              <li class="fragment">
+                Has <span class="emphasize">no</span> column definitions
+              </li>
+              <li class="fragment">
+                Each item can have
+                <span class="emphasize">different</span> attributes
+              </li>
+              <li class="fragment">
+                The only required fields are your
+                <span class="emphasize">partition key</span> (<code>PK</code>)
+                and maybe
+                <span class="emphasize">sort key</span> (<code>SK</code>)
+              </li>
+            </ul>
 
-          <aside class="notes">
-            This is what we mean by schema-less — the DB doesn't care what shape
-            your data takes. It's your app's job to make sense of it.
-          </aside>
+            <aside class="notes">
+              This is what we mean by schema-less — the DB doesn't care what
+              shape your data takes. It's your app's job to make sense of it.
+            </aside>
+          </section>
         </section>
 
         <section id="what-is-single-table-design">
@@ -387,13 +487,16 @@
 
           <ul>
             <li class="fragment">
-              One table to rule them all, one table to find them... 🧙‍♂️
+              <span class="emphasize">One</span> table to rule them all, one
+              table to find them... 🧙‍♂️
             </li>
             <li class="fragment">
-              You store multiple entity types using a composite key
+              You store multiple entity types using a
+              <span class="emphasize">composite key</span>
             </li>
             <li class="fragment">
-              It's not chaos if it's intentional — and it's fast
+              It's not chaos if it's
+              <span class="emphasize">intentional</span> — and it's fast
             </li>
           </ul>
         </section>
@@ -447,12 +550,15 @@
 
           <section>
             <p>
-              <em>One query. One partition. Zero JOINs. Infinite happiness.</em>
+              <span class="fragment">1 query</span>
+              <span class="fragment">+ 1 partition</span>
+              <span class="fragment">+ 0 JOINs</span>
+              <span class="fragment">= ∞ happiness</span>
             </p>
           </section>
         </section>
 
-        <section id="main-use-cases">
+        <section id="main-use-cases-2">
           <h2>4 main use cases</h2>
 
           <ol>
@@ -498,7 +604,7 @@
           <section>
             <h2>What you get in return?</h2>
             <pre class="fragment">
-              <code class="json" data-trim data-line-numbers="|3-4|11-12|21-22">
+              <code class="json" data-trim data-line-numbers="|3-5|11-13|21-23">
                 [
                   {
                     "PK": "USER#123",
@@ -569,7 +675,7 @@
           <section>
             <h2>What you get in return?</h2>
             <pre class="fragment">
-              <code class="json" data-trim data-line-numbers="|3-4|12-13">
+              <code class="json" data-trim data-line-numbers="|3-5|12-15">
                 [
                   {
                     "PK": "USER#123",
@@ -632,7 +738,7 @@
           <section>
             <h2>What you get in return?</h2>
             <pre class="fragment">
-              <code class="json" data-trim data-line-numbers="|3-4">
+              <code class="json" data-trim data-line-numbers="|3-5">
                 [
                   {
                     "PK": "USER#123",
@@ -670,10 +776,15 @@
               <li class="fragment">Global Secondary Index (GSI)</li>
               <ul>
                 <li class="fragment">
-                  Like alternate universes: same data, different access patterns
+                  Like alternate universes:
+                  <span class="emphasize"
+                    >same data, different access patterns</span
+                  >
                 </li>
                 <li class="fragment">
-                  Useful when you don't have the partition key handy
+                  Useful when you
+                  <span class="emphasize">don't have the partition key</span>
+                  handy
                 </li>
               </ul>
             </ul>
@@ -686,7 +797,7 @@
                 {
                   "IndexName": "EntityTypeIndex",
                   "KeySchema": [
-                    { "AttributeName": "entityType", "KeyType": "HASH" }
+                    { "AttributeName": "EntityType", "KeyType": "HASH" }
                   ]
                 }
               </code>
@@ -742,7 +853,10 @@
 
         <section id="what-single-table-design-is-for">
           <section>
-            <h2>Single Table Design is great when ...</h2>
+            <h2>
+              Single Table Design is
+              <span style="color: green">great</span> when ...
+            </h2>
           </section>
 
           <section>
@@ -751,57 +865,67 @@
               <li class="fragment">
                 <em
                   >You're not just throwing queries at the database hoping
-                  something sticks.</em
+                  something sticks</em
                 >
               </li>
               <li class="fragment">
-                You know <em>how</em> you'll access the data before designing
-                the schema.
+                You know <span class="emphasize">how</span> you'll access the
+                data <span class="emphasize">before</span> designing the schema
               </li>
             </ul>
           </section>
 
           <section>
-            <h2>2. ✅ You want fast reads. Like, now.</h2>
+            <h2>
+              2. ✅ You want fast reads.
+              <span class="fragment">Like, now.</span>
+            </h2>
             <ul>
               <li class="fragment">
-                <em>You want millisecond latency, not millisecond regrets.</em>
+                <em>You want millisecond latency, not millisecond regrets</em>
               </li>
               <li class="fragment">
-                1 partition = all related data. No JOINs. No query planning.
-                <em>High</em> read throughput with <em>low</em> latency (&lt;
-                10ms).
+                1 partition = all related data
+                <ul>
+                  <li><span class="emphasize">No</span> JOINs</li>
+                  <li><span class="emphasize">No</span> query planning</li>
+                  <li>
+                    <span class="emphasize">High</span> read throughput with
+                    <span class="emphasize">low</span> latency (&lt; 10ms)
+                  </li>
+                </ul>
               </li>
             </ul>
           </section>
 
           <section>
-            <h2>3. ✅ You're building for scale, not style.</h2>
+            <h2>3. ✅ You're building for scale, not style</h2>
             <ul>
               <li class="fragment">
                 <em
-                  >Your system might one day replace Google Search. Plan
-                  ahead.</em
+                  >Your system might one day replace Google Search, so plan
+                  ahead</em
                 >
               </li>
               <li class="fragment">
-                Scales <em>horizontally</em> without tuning or indexing
-                overhead.
+                Scales <span class="emphasize">horizontally</span> without
+                tuning or indexing overhead
               </li>
             </ul>
           </section>
 
           <section>
-            <h2>4. ✅ You want to spend less.</h2>
+            <h2>4. ✅ You want to spend less</h2>
             <ul>
               <li class="fragment">
                 <em
                   >Your idle database won't run up the AWS bill just to look
-                  busy.</em
+                  busy</em
                 >
               </li>
               <li class="fragment">
-                Pay-per-request = <em>cost-efficient</em> at scale.
+                Pay-per-request =
+                <span class="emphasize">cost-efficient</span> at scale
               </li>
             </ul>
           </section>
@@ -809,7 +933,10 @@
 
         <section id="what-single-table-design-isnt-for">
           <section>
-            <h2>When Single Table Design is <em>not</em> your best friend</h2>
+            <h2>
+              When Single Table Design is
+              <span style="color: red">not</span> your best friend
+            </h2>
           </section>
 
           <section>
@@ -818,7 +945,7 @@
               <li class="fragment">
                 <em
                   >Your access patterns change more often than the fashion
-                  trend.</em
+                  trend</em
                 >
               </li>
               <li class="fragment">
@@ -847,7 +974,7 @@
               <li class="fragment">
                 <em
                   >If your queries have JOINs nested deeper than your trauma,
-                  stick with Postgres.</em
+                  stick with Postgres</em
                 >
               </li>
               <li class="fragment">
@@ -862,12 +989,15 @@
             <ul>
               <li class="fragment">
                 <em
-                  >You want a schema that slaps your hand when you're wrong.</em
+                  >You want a schema that slaps your hand when you're wrong</em
                 >
               </li>
               <li class="fragment">
-                DynamoDB won't stop you from writing garbage. Instead, structure
-                has to be enforced through app logic, and people make mistake.
+                DynamoDB won't stop you from writing garbage
+              </li>
+              <li class="fragment">
+                Instead, structure has to be enforced through app logic, and
+                people make mistake
               </li>
             </ul>
           </section>
@@ -882,11 +1012,11 @@
             <h2>1. 🧠 Start with your access patterns</h2>
             <ul>
               <li class="fragment">
-                <em>Don't design for tables. Design for questions.</em>
+                <em>Don't design for tables, design for questions</em>
               </li>
               <li class="fragment">
                 Begin with real user queries and design your keys and items
-                around how you'll read them.
+                around how you'll read them
               </li>
             </ul>
           </section>
@@ -897,14 +1027,13 @@
               <li class="fragment">
                 <em
                   >Name your keys like they'll be debugged by your future,
-                  sleep-deprived self.</em
+                  sleep-deprived self</em
                 >
               </li>
               <li class="fragment">
-                Use clear, consistent patterns like <code
-                  >PK: USER#123, SK: ORDER#456</code
-                >
-                for maintainability.
+                Use clear, consistent patterns like
+                <code>PK: USER#123, SK: ORDER#456</code>
+                for maintainability
               </li>
             </ul>
           </section>
@@ -914,13 +1043,13 @@
             <ul>
               <li class="fragment">
                 <em
-                  >Group your data like you refuse to pay for that expensive
-                  shipping.</em
+                  >Group your data like how you avoid paying that shipping
+                  fee</em
                 >
               </li>
               <li class="fragment">
                 Place all logically related items under the same PK to enable
-                efficient single-query reads.
+                efficient single-query reads
               </li>
             </ul>
           </section>
@@ -936,7 +1065,7 @@
               </li>
               <li class="fragment">
                 Duplicating frequently accessed data improves performance and
-                reduces query complexity.
+                reduces query complexity
               </li>
             </ul>
           </section>
@@ -949,7 +1078,7 @@
               </li>
               <li class="fragment">
                 Each GSI adds cost and complexity — only create indexes that
-                support critical access patterns.
+                support critical access patterns
               </li>
             </ul>
           </section>
@@ -958,15 +1087,17 @@
             <h2>6. 🧠 Validate structure in code</h2>
             <ul>
               <li class="fragment">
-                <em>Just because DynamoDB lets you YOLO, you shouldn't.</em>
+                <em>Just because DynamoDB lets you YOLO, you shouldn't</em>
               </li>
               <li class="fragment">
                 Use schema validators like TypeScript types or Zod to enforce
-                consistency.
+                consistency
               </li>
             </ul>
           </section>
         </section>
+
+        <section><h2>Q&A</h2></section>
       </div>
     </div>
 
