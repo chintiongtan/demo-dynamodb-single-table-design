@@ -1,0 +1,16 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "db:local:create": "./scripts/local-dynamodb-create.sh",
+    "db:local:delete": "./scripts/local-dynamodb-delete.sh",
+    "db:local:seed": "./scripts/local-dynamodb-seed.sh",
+    "db:local:update": "./scripts/local-dynamodb-update.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.4"
+}

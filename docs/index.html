@@ -505,11 +505,11 @@ config:
           <section data-transition="zoom">
             <pre>
               <code class="json" data-trim data-line-numbers>
-                { "PK": "USER#123", "SK": "METADATA", "EntityType": "USER", "UserId": "123", "Name": "Bob", "Email": "bob@example.com" }
-                { "PK": "USER#123", "SK": "ORDER#456", "EntityType": "ORDER", "ProductId": "001", "Timestamp": "2025-08-02T14:30:00Z" }
-                { "PK": "USER#123", "SK": "ORDER#789", "EntityType": "ORDER", "ProductId": "002", "Timestamp": "2025-09-02T14:30:00Z" }
-                { "PK": "PRODUCT#001", "EntityType": "PRODUCT", "Name": "Mechanical Keyboard", "Price": 120 }
-                { "PK": "PRODUCT#002", "EntityType": "PRODUCT", "Name": "Ergonomic Chair", "Price": 350 }
+                { "PK": "USER#123", "SK": "METADATA", "EntityType": "USER", "Id": "123", "Name": "Bob", "Email": "bob@example.com" }
+                { "PK": "USER#123", "SK": "ORDER#456", "EntityType": "ORDER", "Id": "456", "ProductId": "001", "Timestamp": "2025-08-02T14:30:00Z" }
+                { "PK": "USER#123", "SK": "ORDER#789", "EntityType": "ORDER", "Id": "789", "ProductId": "002", "Timestamp": "2025-09-02T14:30:00Z" }
+                { "PK": "PRODUCT#001", "SK": "METADATA", "EntityType": "PRODUCT", "Id": "001", "Name": "Mechanical Keyboard", "Price": 120 }
+                { "PK": "PRODUCT#002", "SK": "METADATA", "EntityType": "PRODUCT", "Id": "002", "Name": "Ergonomic Chair", "Price": 350 }
               </code>
             </pre>
           </section>
@@ -610,7 +610,7 @@ config:
                     "PK": "USER#123",
                     "SK": "METADATA",
                     "EntityType": "USER",
-                    "UserId": "123",
+                    "Id": "123",
                     "Name": "Bob",
                     "Email": "bob@example.com"
                   },
@@ -618,20 +618,16 @@ config:
                     "PK": "USER#123",
                     "SK": "ORDER#456",
                     "EntityType": "ORDER",
-                    "OrderId": "456",
+                    "Id": "456",
                     "ProductId": "001",
-                    "ProductName": "Mechanical Keyboard",
-                    "ProductPrice": 120,
                     "Timestamp": "2025-08-01T10:00:00Z"
                   },
                   {
                     "PK": "USER#123",
                     "SK": "ORDER#789",
                     "EntityType": "ORDER",
-                    "OrderId": "789",
+                    "Id": "789",
                     "ProductId": "002",
-                    "ProductName": "Ergonomic Chair",
-                    "ProductPrice": 350,
                     "Timestamp": "2025-08-02T14:30:00Z"
                   }
                 ]
@@ -681,20 +677,16 @@ config:
                     "PK": "USER#123",
                     "SK": "ORDER#456",
                     "EntityType": "ORDER",
-                    "OrderId": "456",
+                    "Id": "456",
                     "ProductId": "001",
-                    "ProductName": "Mechanical Keyboard",
-                    "ProductPrice": 120,
                     "Timestamp": "2025-08-01T10:00:00Z"
                   },
                   {
                     "PK": "USER#123",
                     "SK": "ORDER#789",
                     "EntityType": "ORDER",
-                    "OrderId": "789",
+                    "Id": "789",
                     "ProductId": "002",
-                    "ProductName": "Ergonomic Chair",
-                    "ProductPrice": 350,
                     "Timestamp": "2025-08-02T14:30:00Z"
                   }
                 ]
@@ -744,7 +736,7 @@ config:
                     "PK": "USER#123",
                     "SK": "METADATA",
                     "EntityType": "USER",
-                    "UserId": "123",
+                    "Id": "123",
                     "Name": "Bob",
                     "Email": "bob@example.com"
                   },
@@ -829,20 +821,16 @@ config:
                     "PK": "USER#123",
                     "SK": "ORDER#456",
                     "EntityType": "ORDER",
-                    "OrderId": "456",
+                    "Id": "456",
                     "ProductId": "001",
-                    "ProductName": "Mechanical Keyboard",
-                    "ProductPrice": 120,
                     "Timestamp": "2025-08-01T10:00:00Z"
                   },
                   {
                     "PK": "USER#123",
                     "SK": "ORDER#789",
                     "EntityType": "ORDER",
-                    "OrderId": "789",
+                    "Id": "789",
                     "ProductId": "002",
-                    "ProductName": "Ergonomic Chair",
-                    "ProductPrice": 350,
                     "Timestamp": "2025-08-02T14:30:00Z"
                   }
                 ]
@@ -850,6 +838,8 @@ config:
             </pre>
           </section>
         </section>
+
+        <section><h2>DEMO</h2></section>
 
         <section id="what-single-table-design-is-for">
           <section>

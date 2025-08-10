@@ -1,0 +1,130 @@
+    {
+        "TheOneAndOnlyTable": [
+            {
+                "PutRequest": {
+                    "Item": {
+                        "PK": {
+                            "S": "USER#123"
+                        },
+                        "SK": {
+                            "S": "METADATA"
+                        },
+                        "EntityType": {
+                            "S": "USER"
+                        },
+                        "Id": {
+                            "S": "123"
+                        },
+                        "Name": {
+                            "S": "Bob"
+                        },
+                        "Email": {
+                            "S": "bob@example.org"
+                        }
+                    }
+                }
+            },
+            {
+                "PutRequest": {
+                    "Item": {
+                        "PK": {
+                            "S": "USER#123"
+                        },
+                        "SK": {
+                            "S": "ORDER#456"
+                        },
+                        "EntityType": {
+                            "S": "ORDER"
+                        },
+                        "Id": {
+                            "S": "456"
+                        },
+                        "OrderId": {
+                            "S": "456"
+                        },
+                        "ProductId": {
+                            "S": "001"
+                        },
+                        "Timestamp": {
+                            "S": "2025-08-02T14:30:00Z"
+                        }
+                    }
+                }
+            },
+            {
+                "PutRequest": {
+                    "Item": {
+                        "PK": {
+                            "S": "USER#123"
+                        },
+                        "SK": {
+                            "S": "ORDER#789"
+                        },
+                        "EntityType": {
+                            "S": "ORDER"
+                        },
+                        "Id": {
+                            "S": "789"
+                        },
+                        "OrderId": {
+                            "S": "789"
+                        },
+                        "ProductId": {
+                            "S": "002"
+                        },
+                        "Timestamp": {
+                            "S": "2025-09-02T14:30:00Z"
+                        }
+                    }
+                }
+            },
+            {
+                "PutRequest": {
+                    "Item": {
+                        "PK": {
+                            "S": "PRODUCT#001"
+                        },
+                        "SK": {
+                            "S": "METADATA"
+                        },
+                        "EntityType": {
+                            "S": "PRODUCT"
+                        },
+                        "Id": {
+                            "S": "001"
+                        },
+                        "Name": {
+                            "S": "Mechanical Keyboard"
+                        },
+                        "Price": {
+                            "N": "120"
+                        }
+                    }
+                }
+            },
+            {
+                "PutRequest": {
+                    "Item": {
+                        "PK": {
+                            "S": "PRODUCT#002"
+                        },
+                        "SK": {
+                            "S": "METADATA"
+                        },
+                        "EntityType": {
+                            "S": "PRODUCT"
+                        },
+                        "Id": {
+                            "S": "002"
+                        },
+                        "Name": {
+                            "S": "Ergonomic Chair"
+                        },
+                        "Price": {
+                            "N": "350"
+                        }
+                    }
+                }
+            }
+        ]
+    }
