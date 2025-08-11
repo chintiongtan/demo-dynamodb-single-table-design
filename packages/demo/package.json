@@ -4,13 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "db:local:create": "./scripts/local-dynamodb-create.sh",
-    "db:local:delete": "./scripts/local-dynamodb-delete.sh",
-    "db:local:seed": "./scripts/local-dynamodb-seed.sh",
-    "db:local:update": "./scripts/local-dynamodb-update.sh"
+    "dynamodb:local:create": "./scripts/local-dynamodb-create.sh",
+    "dynamodb:local:delete": "./scripts/local-dynamodb-delete.sh",
+    "dynamodb:local:seed": "./scripts/local-dynamodb-seed.sh",
+    "dynamodb:local:update": "./scripts/local-dynamodb-update.sh",
+    "postgres:local:setup": "./scripts/local-postgres-setup.sh"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.12.4"
+  "packageManager": "pnpm@10.12.4",
+  "devDependencies": {
+    "ts-node": "^10.9.2"
+  }
 }

@@ -5,7 +5,8 @@
             "extensions": [
                 "dbaeumer.vscode-eslint",
                 "eamodio.gitlens",
-                "esbenp.prettier-vscode"
+                "esbenp.prettier-vscode",
+                "inferrinizzard.prettier-sql-vscode"
             ]
         }
     },
