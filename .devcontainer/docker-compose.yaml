@@ -13,9 +13,6 @@ services:
     image: demo-dynamodb-single-table-design
     volumes:
       - ../:/workspace:cached
-    depends_on:
-      - postgres
-      - localstack
 
   postgres:
     image: postgres:15
